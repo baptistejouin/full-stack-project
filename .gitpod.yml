@@ -4,7 +4,7 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
-  - init: npm install && npm run dev
+  - init: npm install
     command: |
       export HMR_HOST=`gp url 3000`
       npm run dev
@@ -17,3 +17,9 @@ vscode:
 ports:
   - port: 3000
     onOpen: open-browser
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
