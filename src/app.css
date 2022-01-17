@@ -1,0 +1,32 @@
+:root {
+    --c0: #f0f4ff;
+    --c1: #dfedff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--c0);
+    background: linear-gradient(
+        180deg,
+        var(--c1),
+        var(--c0)
+    );
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 2rem auto;
+    text-align: center;
+}
+@media screen and (max-width: 580px) {
+    h1 {
+        font-size: 1.45rem;
+    }
+}
