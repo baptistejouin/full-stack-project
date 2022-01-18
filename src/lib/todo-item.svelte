@@ -13,7 +13,7 @@
         <button aria-label="Sauvegarder les changements" class="save" />
     </form>
 
-    <form action="" method="">
+    <form action="/api/todos/{todo.uid}.json?_method=delete" method="post">
         <button aria-label="Supprimer les changements" class="delete" />
     </form>
 </div>

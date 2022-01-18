@@ -4,4 +4,5 @@ type Todo = {
     create_at: Date;
     text: string;
     done: boolean;
+    uid: string;
 }
