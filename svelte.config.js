@@ -11,7 +11,7 @@ const config = {
 		adapter: adapter(),
 
 		methodOverride: {
-			allowed: ['DELETE']
+			allowed: ['DELETE', 'PATCH']
 		},
 
 		// hydrate the <div id="svelte"> element in src/app.html

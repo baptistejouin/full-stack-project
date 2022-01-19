@@ -8,8 +8,8 @@
         <button aria-label="Définir comme fait ou non fait" class="toggle" />
     </form>
 
-    <form action="" method="" class="text">
-        <input type="text" value={todo.text} />
+    <form action="/api/todos/{todo.uid}.json?_method=patch" method="post" class="text">
+        <input type="text" name="text" value={todo.text} />
         <button aria-label="Sauvegarder les changements" class="save" />
     </form>
 
