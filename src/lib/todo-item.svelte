@@ -2,10 +2,10 @@
     export let todo: Todo;
 </script>
 
-<div class="todo done">
-    <form action="" method="">
-        <input type="hidden" name="done" value="" />
-        <button aria-label="Définir comme fait ou non fait" class="toggle" />
+<div class="todo" class:done={todo.done}>
+    <form action="/api/todos/{todo.uid}.json?_method=patch" method="post">
+        <input type="hidden" name="done" value="{todo.done ? '' : 'true'}" />
+        <button aria-label="Définir comme {todo.done ? 'non fait' : 'fait'}" class="toggle" />
     </form>
 
     <form action="/api/todos/{todo.uid}.json?_method=patch" method="post" class="text">
@@ -78,8 +78,7 @@
         transition: opacity 0.2s;
         opacity: 1;
     }
-    /* TODO: Décommenter quand l'API sera mise en place. */
-    /* .done {
+    .done {
         transform: none;
         opacity: 0.4;
         filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.1));
@@ -87,5 +86,5 @@
 
     .done .toggle {
         background-image: url("data:image/svg+xml,%3Csvg width='22' height='16' viewBox='0 0 22 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20.5 1.5L7.4375 14.5L1.5 8.5909' stroke='%23676778' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    } */
+    }
 </style>
