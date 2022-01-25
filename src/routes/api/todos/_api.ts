@@ -1,37 +1,50 @@
 import type { Request } from "@sveltejs/kit"
+import PrismaClient from "$lib/prisma"
 
-//TODO: Sauvegarder dans une base de données
-let todos: Todo[] = [];
+const prisma = new PrismaClient();
 
-
-export const api = (request: Request, data?: Record<string, unknown>) => {
+export const api = async (request: Request, data?: Record<string, unknown>) => {
     let body = {},
         status = 500;
 
     switch (request.method.toLocaleUpperCase()) {
         case "GET":
-            body = todos;
+            body = await prisma.todo.findMany({
+                orderBy: {
+                  done: 'asc'
+                }
+              });
             status = 200;
             break;
         case "POST":
-            todos.push(data as Todo);
-            body = data;
+            body = await prisma.todo.create({
+                data: {
+                    create_at: data.create_at as Date,
+                    done: data.done as boolean,
+                    text: data.text as string
+                }
+            })
             status = 201;
             break;
         case "DELETE":
-            todos = todos.filter(todo => todo.uid !== request.params.uid);
+            body = await prisma.todo.delete({
+                where: {
+                    uid: request.params.uid
+                }
+            })
             status = 200;
             break;
         case "PATCH":
-            todos = todos.map(todo => {
-                if (todo.uid == request.params.uid) {
-                    if (data.text) todo.text = data.text as string;
-                    else todo.done = data.done as boolean;
+            body = await prisma.todo.update({
+                where: {
+                    uid: request.params.uid
+                },
+                data: {
+                    done: data.done,
+                    text: data.text || undefined
                 }
-                return todo;
-            });
+            })
             status = 200;
-            body = todos.find(todo => todo.uid === request.params.uid)
             break;
         default:
             break;
